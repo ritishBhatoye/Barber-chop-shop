@@ -31,10 +31,7 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="services" element={<Services />} />
           <Route path="gallery" element={<Gallery />} />
-          <Route
-            path="terms-and-conditions "
-            element={<TermsAndConditions />}
-          />
+          <Route path="terms-and-conditions" element={<TermsAndConditions />} />
           <Route path="privacy-policy" element={<PrivacyPolicies />} />
           <Route path="reservation" element={<Reservation />} />
         </Routes>
