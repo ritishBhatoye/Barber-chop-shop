@@ -1,25 +1,30 @@
 import React from 'react';
 /*import {useState,setState} from 'react';*/
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import StaticHeader from './STATICHeader/StacticHeader';
 import { Footer } from './Footer/Footer';
-import axios from 'axios';
+// import axios from 'axios';
+import { createReservation } from './utils/helper';
 
-axios.defaults.baseURL = 'https://barber-shop-three.vercel.app/api';
-axios.defaults.headers.common['Content-Type'] = 'application/json';
-axios.defaults.headers.common.Accept = 'application/json';
+// axios.defaults.baseURL = 'https://barber-shop-three.vercel.app/api';
+// axios.defaults.headers.common['Content-Type'] = 'application/json';
+// axios.defaults.headers.common.Accept = 'application/json';
 const Reservation = () => {
+  const [loading, setLoading] = useState(false);
+
   const Name = useRef();
   const Phone = useRef();
   const Message = useRef();
   const Option = useRef();
   const Date = useRef();
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // console.log('COSTUMER NAME : ', Name.current.value, '');
     // console.log('COSTUMER PHONE : ', Phone.current.value, '');
     // console.log('COSTUMER MESSAGE : ', Message.current.value, '');
     // console.log('COSTUMER DATE : ', Date.current.value, '');
     // console.log('SELECTED SERVICE : ', Option.current.value, '');
+    setLoading(true);
+
     const values = {
       name: Name?.current?.value,
       telephone: Phone?.current?.value,
@@ -38,22 +43,19 @@ const Reservation = () => {
     } else if (!values.date) {
       alert('Please select appointment date!');
     } else {
-      axios
-        .post('/reservation', {
-          name: values.name,
-          telephone: values.telephone,
-          message: values.message,
-          service: values.service,
-          date: values.date,
-        })
-        .then((res) => {
-          alert('Details Submit Successfully!!');
-        })
-        .catch((err) => {
-          alert('Error: Something went wrong!');
-        });
+      try {
+        await createReservation(values);
+        alert('Details Submit Successfully!!');
+      } catch (error) {
+        alert('Error: Something went wrong!');
+      }
     }
+    setTimeout(() => {
+      setLoading(false);
+      window.location.reload(false);
+    }, 400);
   };
+
   return (
     <>
       <StaticHeader />
@@ -117,11 +119,12 @@ const Reservation = () => {
                 ></textarea>
               </form>
               <button
+                disabled={loading}
                 type="submit"
                 className="footer-button"
                 onClick={handleSubmit}
               >
-                BOOK NOW
+                {loading ? 'Loading...' : 'BOOK NOW'}
               </button>
             </div>
             <div className="flex-2">
@@ -132,10 +135,10 @@ const Reservation = () => {
                   <option value="" className="disabled" disabled selected>
                     Haircut
                   </option>
-                  <option value="1">Haircut</option>
-                  <option value="2">Shave</option>
-                  <option value="3">Haircut & Shave</option>
-                  <option value="4">Beard Trim</option>
+                  <option value="Haircut">Haircut</option>
+                  <option value="Shave">Shave</option>
+                  <option value="Haircut & Shave">Haircut & Shave</option>
+                  <option value="Beard Trim">Beard Trim</option>
                 </select>
                 <label for="appointment">CHOOSE AN APPOINTMENT DATE</label>
                 <input

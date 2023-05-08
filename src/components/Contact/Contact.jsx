@@ -4,13 +4,9 @@ import StaticHeader from '../STATICHeader/StacticHeader';
 /*import {useState,setState} from 'react';*/
 import { useState, setState } from 'react';
 import { useRef } from 'react';
-import axios from 'axios';
-
-axios.defaults.baseURL = 'https://barber-shop-three.vercel.app/api';
-axios.defaults.headers.common['Content-Type'] = 'application/json';
-axios.defaults.headers.common.Accept = 'application/json';
-
+import { createContact } from '../utils/helper.js';
 export const Contact = () => {
+  const [loading, setLoading] = useState(false);
   // var view = () => {
   //   var name = document.getElementById('name').value;
   //   var phone = document.getElementById('phone').value;
@@ -58,13 +54,13 @@ export const Contact = () => {
   const Phone = useRef();
   const Message = useRef();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // console.log('COSTUMER NAME : ', Name.current.value, '');
     // console.log('COSTUMER PHONE : ', Phone.current.value, '');
     // console.log('COSTUMER MESSAGE : ', Message.current.value, '');
 
     // alert('COSTUMER INFO SENT SUCCESSFULLY!!!');
-
+    setLoading(true);
     const values = {
       name: Name?.current?.value,
       telephone: Phone?.current?.value,
@@ -78,19 +74,17 @@ export const Contact = () => {
     } else if (!values.message) {
       alert('Please enter your message!');
     } else {
-      axios
-        .post('/contact', {
-          name: values.name,
-          telephone: values.telephone,
-          message: values.message,
-        })
-        .then((res) => {
-          alert('Details Submit Successfully!!');
-        })
-        .catch((err) => {
-          alert('Error: Something went wrong!');
-        });
+      try {
+        await createContact(values);
+        alert('Details Submit Successfully!!');
+      } catch (error) {
+        alert('Error: Something went wrong!');
+      }
     }
+    setTimeout(() => {
+      setLoading(false);
+      window.location.reload(false);
+    }, 400);
   };
 
   return (
@@ -161,11 +155,12 @@ export const Contact = () => {
                 ></textarea>
               </form>
               <button
+                disabled={loading}
                 type="submit"
                 className="footer-button"
                 onClick={handleSubmit}
               >
-                SUBMIT
+                {loading ? 'Loading...' : 'SUBMIT'}
               </button>
             </div>
             {/* <div className="flex-2">
