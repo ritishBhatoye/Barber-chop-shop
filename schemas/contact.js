@@ -10,7 +10,7 @@ export default {
     },
     {
       name: 'telephone',
-      type: 'number',
+      type: 'string',
       title: 'Phone Number',
     },
     {

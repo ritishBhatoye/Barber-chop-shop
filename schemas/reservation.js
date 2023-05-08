@@ -9,14 +9,14 @@ export default {
       title: 'Name',
     },
     {
+      name: 'telephone',
+      type: 'string',
+      title: 'Phone Number',
+    },
+    {
       name: 'service',
       type: 'string',
       title: 'Service',
-    },
-    {
-      name: 'telephone',
-      type: 'number',
-      title: 'Phone Number',
     },
     {
       name: 'date',
