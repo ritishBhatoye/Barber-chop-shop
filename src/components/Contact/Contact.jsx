@@ -4,14 +4,19 @@ import StaticHeader from '../STATICHeader/StacticHeader';
 /*import {useState,setState} from 'react';*/
 import { useState, setState } from 'react';
 import { useRef } from 'react';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://barber-shop-three.vercel.app/api';
+axios.defaults.headers.common['Content-Type'] = 'application/json';
+axios.defaults.headers.common.Accept = 'application/json';
 
 export const Contact = () => {
-  var view = () => {
-    var name = document.getElementById('name').value;
-    var phone = document.getElementById('phone').value;
-    console.log('COSTUMER NAME : ' + name);
-    console.log('COSTUMER PHONE : ' + phone);
-  };
+  // var view = () => {
+  //   var name = document.getElementById('name').value;
+  //   var phone = document.getElementById('phone').value;
+  //   console.log('COSTUMER NAME : ' + name);
+  //   console.log('COSTUMER PHONE : ' + phone);
+  // };
 
   /*const [user,setUser]=useState(
       {name:"",email:"",phone:"",service:"",date:"",message:""}
@@ -54,12 +59,40 @@ export const Contact = () => {
   const Message = useRef();
 
   const handleSubmit = () => {
-    console.log('COSTUMER NAME : ', Name.current.value, '');
-    console.log('COSTUMER PHONE : ', Phone.current.value, '');
-    console.log('COSTUMER MESSAGE : ', Message.current.value, '');
+    // console.log('COSTUMER NAME : ', Name.current.value, '');
+    // console.log('COSTUMER PHONE : ', Phone.current.value, '');
+    // console.log('COSTUMER MESSAGE : ', Message.current.value, '');
 
-    alert('COSTUMER INFO SENT SUCCESSFULLY!!!');
+    // alert('COSTUMER INFO SENT SUCCESSFULLY!!!');
+
+    const values = {
+      name: Name?.current?.value,
+      telephone: Phone?.current?.value,
+      message: Message?.current?.value,
+    };
+
+    if (!values.name) {
+      alert('Please enter your name!');
+    } else if (!values.telephone) {
+      alert('Please enter your phone number!');
+    } else if (!values.message) {
+      alert('Please enter your message!');
+    } else {
+      axios
+        .post('/contact', {
+          name: values.name,
+          telephone: values.telephone,
+          message: values.message,
+        })
+        .then((res) => {
+          alert('Details Submit Successfully!!');
+        })
+        .catch((err) => {
+          alert('Error: Something went wrong!');
+        });
+    }
   };
+
   return (
     <>
       <StaticHeader />
