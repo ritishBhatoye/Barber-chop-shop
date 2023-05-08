@@ -1,63 +1,21 @@
 import React from 'react';
-import { Footer } from '../Footer/Footer';
-import StaticHeader from '../STATICHeader/StacticHeader';
 /*import {useState,setState} from 'react';*/
-import { useState, setState } from 'react';
 import { useRef } from 'react';
+import StaticHeader from './STATICHeader/StacticHeader';
+import { Footer } from './Footer/Footer';
 
-export const Contact = () => {
-  var view = () => {
-    var name = document.getElementById('name').value;
-    var phone = document.getElementById('phone').value;
-    console.log('COSTUMER NAME : ' + name);
-    console.log('COSTUMER PHONE : ' + phone);
-  };
-
-  /*const [user,setUser]=useState(
-      {name:"",email:"",phone:"",service:"",date:"",message:""}
-    );
-    let name,value;
-    const handleInputs=(e)=>{
-      console.log(e)
-      name=e.target.name;
-      value=e.target.value;
-      setUser({...user,[name]:value})
-    }
-    */
-  // const [Name, setName] = useState(null);
-  // const [phone,setPhone] = useState(null);
-  // const [message,setMessage]=useState(null);
-
-  // const handleInputChange = (e) => {
-  //     const {id , value} = e.target;
-  //     if(id === "Name"){
-  //         setFirstName(value);
-  //     }
-
-  //     if(id === "email"){
-  //         setEmail(value);
-  //     }
-  //     if(id === "password"){
-  //         setPassword(value);
-  //     }
-  //     if(id === "confirmPassword"){
-  //         setConfirmPassword(value);
-  //     }
-
-  // }
-
-  // const handleSubmit  = () => {
-  //     console.log(firstName,lastName,email,password,confirmPassword);
-  // }
+const Reservation = () => {
   const Name = useRef();
   const Phone = useRef();
   const Message = useRef();
-
+  const Option = useRef();
+  const Date = useRef();
   const handleSubmit = () => {
     console.log('COSTUMER NAME : ', Name.current.value, '');
     console.log('COSTUMER PHONE : ', Phone.current.value, '');
     console.log('COSTUMER MESSAGE : ', Message.current.value, '');
-
+    console.log('COSTUMER DATE : ', Date.current.value, '');
+    console.log('SELECTED SERVICE : ', Option.current.value, '');
     alert('COSTUMER INFO SENT SUCCESSFULLY!!!');
   };
   return (
@@ -99,26 +57,21 @@ export const Contact = () => {
                 </span>
                 <span>
                   <input
-                    style={{ width: '100%' }}
                     type="text"
                     placeholder="Your name here"
                     id="name"
                     ref={Name}
                   />
                 </span>
-                <div>
-                  <label for="phone">ENTER PHONE NUMBER:</label>
-                  <br />
-                  <input
-                    type="tel"
-                    style={{ width: '100%' }}
-                    id="phone"
-                    name="phone"
-                    placeholder="Your phone here"
-                    pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-                    ref={Phone}
-                  ></input>
-                </div>
+                <label for="phone">Enter your phone number:</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="Your phone here"
+                  pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                  ref={Phone}
+                ></input>
                 <p>
                   <label for="message">MESSAGE:</label>
                 </p>
@@ -132,10 +85,10 @@ export const Contact = () => {
                 className="footer-button"
                 onClick={handleSubmit}
               >
-                SUBMIT
+                BOOK NOW
               </button>
             </div>
-            {/* <div className="flex-2">
+            <div className="flex-2">
               <form>
                 <label> SELECT SERVICE </label>
                 <br />
@@ -156,7 +109,7 @@ export const Contact = () => {
                   name="appointment"
                 />
               </form>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
@@ -164,3 +117,5 @@ export const Contact = () => {
     </>
   );
 };
+
+export default Reservation;

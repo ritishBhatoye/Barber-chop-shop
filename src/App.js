@@ -17,6 +17,7 @@ import Services from './components/Services/Services';
 import Gallery from './components/Gallery/Gallery';
 import PrivacyPolicies from './components/PrivacyPolicies';
 import TermsAndConditions from './components/TermsAndConditions';
+import Reservation from './components/Reservation';
 
 function App() {
   return (
@@ -24,17 +25,18 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="Contact" element={<Contact />} />
-          <Route path="News" element={<News />} />
-          <Route path="Menu" element={<Menu />} />
-          <Route path="About" element={<About />} />
-          <Route path="Services" element={<Services />} />
-          <Route path="Gallery" element={<Gallery />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="news" element={<News />} />
+          <Route path="menu" element={<Menu />} />
+          <Route path="about" element={<About />} />
+          <Route path="services" element={<Services />} />
+          <Route path="gallery" element={<Gallery />} />
           <Route
             path="terms-and-conditions "
             element={<TermsAndConditions />}
           />
           <Route path="privacy-policy" element={<PrivacyPolicies />} />
+          <Route path="reservation" element={<Reservation />} />
         </Routes>
       </Router>
     </>

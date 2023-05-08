@@ -56,7 +56,7 @@ export const Menu = () => {
                 className="bg-brown-out"
               >
                 <li>
-                  <Link to="/Contact">RESERVATOIN</Link>
+                  <Link to="/reservation">RESERVATION</Link>
                 </li>
               </motion.span>
             </ul>
