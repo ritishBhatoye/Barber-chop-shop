@@ -4,7 +4,8 @@ import { useRef, useState } from 'react';
 import StaticHeader from './STATICHeader/StacticHeader';
 import { Footer } from './Footer/Footer';
 // import axios from 'axios';
-import { createReservation } from './utils/helper';
+// import { createReservation } from './utils/helper';
+import axios from './utils/api';
 
 // axios.defaults.baseURL = 'https://barber-shop-three.vercel.app/api';
 // axios.defaults.headers.common['Content-Type'] = 'application/json';
@@ -43,17 +44,27 @@ const Reservation = () => {
     } else if (!values.date) {
       alert('Please select appointment date!');
     } else {
-      try {
-        await createReservation(values);
-        alert('Details Submit Successfully!!');
-      } catch (error) {
-        alert('Error: Something went wrong!');
-      }
-    }
-    setTimeout(() => {
+      await axios
+        .post('/reservation', JSON.stringify(values))
+        .then(function (response) {
+          alert('Details Submit Successfully!!');
+          setTimeout(() => {
+            setLoading(false);
+            window.location.reload(false);
+          }, 400);
+        })
+        .catch(function (error) {
+          setLoading(false);
+          alert('Error: Something went wrong!');
+        });
       setLoading(false);
-      window.location.reload(false);
-    }, 400);
+      // try {
+      //   await createReservation(values);
+      //   alert('Details Submit Successfully!!');
+      // } catch (error) {
+      //   alert('Error: Something went wrong!');
+      // }
+    }
   };
 
   return (

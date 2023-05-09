@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Footer } from '../Footer/Footer';
 import StaticHeader from '../STATICHeader/StacticHeader';
 /*import {useState,setState} from 'react';*/
@@ -6,7 +6,7 @@ import { useState, setState } from 'react';
 import { useRef } from 'react';
 import { createContact } from '../utils/helper.js';
 
-// import axios from '../utils/api';
+import axios from '../utils/api';
 
 export const Contact = () => {
   const [loading, setLoading] = useState(false);
@@ -77,17 +77,32 @@ export const Contact = () => {
     } else if (!values.message) {
       alert('Please enter your message!');
     } else {
-      try {
-        await createContact(values);
-        alert('Details Submit Successfully!!');
-        setTimeout(() => {
+      // try {
+      //   await createContact(values);
+      //   alert('Details Submit Successfully!!');
+      //   setTimeout(() => {
+      //     setLoading(false);
+      //     window.location.reload(false);
+      //   }, 400);
+      // } catch (error) {
+      //   setLoading(false);
+      //   alert('Error: Something went wrong!');
+      // }
+
+      await axios
+        .post('/contact', JSON.stringify(values))
+        .then(function (response) {
+          alert('Details Submit Successfully!!');
+          setTimeout(() => {
+            setLoading(false);
+            window.location.reload(false);
+          }, 400);
+        })
+        .catch(function (error) {
           setLoading(false);
-          window.location.reload(false);
-        }, 400);
-      } catch (error) {
-        setLoading(false);
-        alert('Error: Something went wrong!');
-      }
+          alert('Error: Something went wrong!');
+        });
+      setLoading(false);
     }
 
     // try {
@@ -97,6 +112,10 @@ export const Contact = () => {
     //   alert('Error: Something went wrong!');
     // }
   };
+
+  // useEffect(() => {
+
+  // }, []);
 
   return (
     <>
