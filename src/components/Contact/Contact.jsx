@@ -5,6 +5,9 @@ import StaticHeader from '../STATICHeader/StacticHeader';
 import { useState, setState } from 'react';
 import { useRef } from 'react';
 import { createContact } from '../utils/helper.js';
+
+// import axios from '../utils/api';
+
 export const Contact = () => {
   const [loading, setLoading] = useState(false);
   // var view = () => {
@@ -77,14 +80,22 @@ export const Contact = () => {
       try {
         await createContact(values);
         alert('Details Submit Successfully!!');
+        setTimeout(() => {
+          setLoading(false);
+          window.location.reload(false);
+        }, 400);
       } catch (error) {
+        setLoading(false);
         alert('Error: Something went wrong!');
       }
     }
-    setTimeout(() => {
-      setLoading(false);
-      window.location.reload(false);
-    }, 400);
+
+    // try {
+    //   await createContact(values);
+    //   alert('Details Submit Successfully!!');
+    // } catch (error) {
+    //   alert('Error: Something went wrong!');
+    // }
   };
 
   return (

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import About from '../About/About';
 import Container from './Container';
 import Description from './Des';
@@ -13,13 +13,13 @@ import 'aos';
 export const Home = () => {
   return (
     <>
-     <Header />
-    <Container />
-    <HomeService />
-    <Description />
-    <HomeNews />
-    <FooterHome />
-    <Footer />
-  </>
-  )
-}
+      <Header />
+      <Container />
+      <HomeService />
+      <Description />
+      <HomeNews />
+      <FooterHome />
+      <Footer />
+    </>
+  );
+};
