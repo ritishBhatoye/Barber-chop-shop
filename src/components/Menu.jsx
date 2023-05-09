@@ -49,6 +49,13 @@ export const Menu = () => {
                   MENU
                 </Link>
               </motion.li>
+              <motion.li variants={FadeVarients} initial="hide" animate="Fade">
+                <Link to="/login">LOG IN</Link>
+              </motion.li>
+              <motion.li variants={FadeVarients} initial="hide" animate="Fade">
+                <Link to="/register">SIGN UP</Link>
+              </motion.li>
+
               <motion.span
                 variants={FadeVarients}
                 initial="hide"

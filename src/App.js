@@ -18,6 +18,8 @@ import Gallery from './components/Gallery/Gallery';
 import PrivacyPolicies from './components/PrivacyPolicies';
 import TermsAndConditions from './components/TermsAndConditions';
 import Reservation from './components/Reservation';
+import Login from './components/Login';
+import Register from './components/RegisterUser';
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
           <Route path="terms-and-conditions" element={<TermsAndConditions />} />
           <Route path="privacy-policy" element={<PrivacyPolicies />} />
           <Route path="reservation" element={<Reservation />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
         </Routes>
       </Router>
     </>
