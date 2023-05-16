@@ -17,6 +17,9 @@ const Header = () => {
       },
     },
   };
+
+  // const isLogIn = localStorage.getItem('isLogIn');
+  // console.log('isLogIn', isLogIn);
   return (
     <div>
       <header className="header">
@@ -37,6 +40,40 @@ const Header = () => {
               <motion.li variants={FadeVarients} initial="hide" animate="Fade">
                 <Link to="/Menu">MENU </Link>
               </motion.li>
+              {/* {isLogIn !== 'true' && (
+                <>
+                  <motion.li
+                    variants={FadeVarients}
+                    initial="hide"
+                    animate="Fade"
+                  >
+                    <Link to="/login">LOGIN </Link>
+                  </motion.li>
+                  <motion.li
+                    variants={FadeVarients}
+                    initial="hide"
+                    animate="Fade"
+                  >
+                    <Link to="/register">SIGN UP </Link>
+                  </motion.li>
+                </>
+              )} */}
+              {/*
+              {isLogIn === 'true' && (
+                <motion.li
+                  variants={FadeVarients}
+                  initial="hide"
+                  animate="Fade"
+                >
+                  <a
+                    onClick={async () =>
+                      await localStorage.setItem('isLogIn', false)
+                    }
+                  >
+                    LOG OUT{' '}
+                  </a>
+                </motion.li>
+              )} */}
               <motion.span
                 className="bg-brown-out align-line"
                 variants={FadeVarients}

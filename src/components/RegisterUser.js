@@ -35,8 +35,9 @@ const RegisterUser = () => {
     } else {
       await axios
         .post('/register', JSON.stringify(values))
-        .then(function (response) {
+        .then(async function (response) {
           alert('Register Successfully!!');
+          await localStorage.setItem('isLogIn', true);
           setTimeout(() => {
             setLoading(false);
             window.location.replace('/');

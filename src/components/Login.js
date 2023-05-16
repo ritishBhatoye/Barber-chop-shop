@@ -26,8 +26,9 @@ const Login = () => {
     } else {
       await axios
         .post('/login', JSON.stringify(values))
-        .then(function (response) {
+        .then(async function (response) {
           alert('Log In Successfully!!');
+          await localStorage.setItem('isLogIn', true);
           setTimeout(() => {
             setLoading(false);
             window.location.replace('/');

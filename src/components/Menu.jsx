@@ -27,6 +27,8 @@ export const Menu = () => {
   const Hide = () => {
     setMenu(false);
   };
+  const isLogIn = localStorage.getItem('isLogIn');
+
   return (
     <div>
       <header className="Menu-navbar">
@@ -49,13 +51,40 @@ export const Menu = () => {
                   MENU
                 </Link>
               </motion.li>
-              <motion.li variants={FadeVarients} initial="hide" animate="Fade">
-                <Link to="/login">LOG IN</Link>
-              </motion.li>
-              <motion.li variants={FadeVarients} initial="hide" animate="Fade">
-                <Link to="/register">SIGN UP</Link>
-              </motion.li>
-
+              {isLogIn !== 'true' && (
+                <>
+                  <motion.li
+                    variants={FadeVarients}
+                    initial="hide"
+                    animate="Fade"
+                  >
+                    <Link to="/login">LOG IN</Link>
+                  </motion.li>
+                  <motion.li
+                    variants={FadeVarients}
+                    initial="hide"
+                    animate="Fade"
+                  >
+                    <Link to="/register">SIGN UP</Link>
+                  </motion.li>
+                </>
+              )}
+              {isLogIn === 'true' && (
+                <motion.li
+                  variants={FadeVarients}
+                  initial="hide"
+                  animate="Fade"
+                >
+                  <a
+                    href="/"
+                    onClick={async () =>
+                      await localStorage.setItem('isLogIn', false)
+                    }
+                  >
+                    LOG OUT
+                  </a>
+                </motion.li>
+              )}
               <motion.span
                 variants={FadeVarients}
                 initial="hide"
